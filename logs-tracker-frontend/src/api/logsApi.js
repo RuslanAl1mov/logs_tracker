@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:8000'; // Адрес сервера с API
+const API_BASE_URL = 'http://localhost:8000/api'; // Адрес сервера с API
 
 // Получение списка логов
 export const fetchLogs = async () => {
@@ -27,3 +27,22 @@ export const fetchLogById = async (id) => {
     throw error;
   }
 };
+
+export const uploadLogs = async (formData) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/upload/`, {
+      method: 'POST',
+      body: formData,
+    });
+    if (!response.ok) {
+      throw new Error('Ошибка загрузки данных');
+    }
+    return await response.json();
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+
+}
+
+

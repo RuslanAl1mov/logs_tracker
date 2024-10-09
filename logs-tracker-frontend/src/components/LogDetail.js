@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchLogById } from '../api/logsApi';
+import { toast } from 'react-toastify';
 
 const LogDetails = ({ id }) => {
   const [log, setLog] = useState(null);
@@ -10,11 +11,10 @@ const LogDetails = ({ id }) => {
   useEffect(() => {
     const getLog = async () => {
       try {
-        const data = await fetchLogById(id); 
+        const data = await fetchLogById(id);
         setLog(data);
         setLoading(false);
       } catch (err) {
-        setError(err.message);
         setLoading(false);
       }
     };
@@ -26,15 +26,45 @@ const LogDetails = ({ id }) => {
   if (error) return <p>Ошибка: {error}</p>;
 
   return (
-    <div>
-      <h2>Детали лога</h2>
-      <p>Timestamp: {log.timestamp}</p>
-      <p>Computer: {log.computer_name}</p>
-      <p>Event Type: {log.event_type}</p>
-      <p>Application: {log.application}</p>
-      <p>Window Title: {log.window_title}</p>
-      <p>Content: {log.content}</p>
-      <img src={log.screenshot_url} alt="Скриншот" />
+    <div className="log-info-block">
+      <div className="info-block">
+        <table className="info-table">
+          <tbody>
+            <tr>
+              <td>timestamp</td>
+              <td>{log.timestamp}</td>
+            </tr>
+            <tr>
+              <td>computer_name</td>
+              <td>{log.computer_name}</td>
+            </tr>
+            <tr>
+              <td>event_type</td>
+              <td>{log.event_type}</td>
+            </tr>
+            <tr>
+              <td>application</td>
+              <td>{log.application}</td>
+            </tr>
+            <tr>
+              <td>window_title</td>
+              <td>{log.window_title}</td>
+            </tr>
+            <tr>
+              <td>content</td>
+              <td>{log.content}</td>
+            </tr>
+            <tr>
+              <td>Ссылка на скриншот</td>
+              <td><a href={log.screenshot} target='_blank'>Ссылка на скриншот</a></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+      <div className='info-image'>
+        <img className="log-screenshot" src={log.screenshot} />
+      </div>
     </div>
   );
 };
