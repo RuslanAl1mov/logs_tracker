@@ -4,10 +4,10 @@ import { toast } from 'react-toastify';
 
 const UploadForm = ({ }) => {
     const [file, setFile] = useState(null);
-    const [error, setError] = useState(null);
 
+    // Сохраняем загруженный файл
     const handleFileChange = (event) => {
-        setFile(event.target.files[0]); // Сохраняем загруженный файл
+        setFile(event.target.files[0]); 
     };
 
     const handleSubmit = async (event) => {
@@ -26,7 +26,7 @@ const UploadForm = ({ }) => {
             setFile(null); // Сбрасываем состояние после успешной загрузки
             toast.success("Логи отправлены!")
         } catch (err) {
-            setError(err.message); // Сохраняем ошибку для отображения
+            console.log(err.message); // Сохраняем ошибку для отображения
             toast.error("Ошибка отправки!")
         }
     };
@@ -35,7 +35,6 @@ const UploadForm = ({ }) => {
             <form onSubmit={handleSubmit} className='submit-form'>
                 <input className="screenshot-input" type="file" accept="image/*" onChange={handleFileChange} />
                 <button className={`submit-btn ${!file ? 'submit-btn--disabled' : ''}`} type="submit" disabled={!file}>Загрузить</button>
-                {error && <p>Ошибка: {error}</p>}
             </form>
     );
 };

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import LogsList from '../components/LogList';
-import { fetchLogs } from '../api/logsApi';
 import LogDetails from '../components/LogDetail';
 
 
 const LogsListPage = () => {
     const [logSelect, setLogSelect] = useState(null);
 
+    // Страница списка логов
     return (
         <div className="main-container">
             <div className='content-block'>

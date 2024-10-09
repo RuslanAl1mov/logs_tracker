@@ -8,13 +8,13 @@ const LogsList = () => {
   const [error, setError] = useState(null);
   const [selectedLogId, setSelectedLogId] = useState(null);
 
-  // Load logs on component mount
+  // Загрузка всех элементов
   useEffect(() => {
     const getLogs = async () => {
       try {
         const data = await fetchLogs();
-        console.log(data); // Check the API response
-        setLogs(data); // Set logs directly
+        console.log(data);
+        setLogs(data.reverse());
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -24,8 +24,9 @@ const LogsList = () => {
     getLogs();
   }, []);
 
+  // Добавлеие/закрытие окна доп информации
   const handleDetailsBlockClick = (log_id) => {
-    setSelectedLogId((prevId) => (prevId === log_id ? null : log_id)); // Toggle selected log ID
+    setSelectedLogId((prevId) => (prevId === log_id ? null : log_id));
   };
 
   if (loading) return <p>Загрузка...</p>;
@@ -38,11 +39,14 @@ const LogsList = () => {
           logs.map(log => (
             <li className="logs-card" key={log.id} onClick={() => handleDetailsBlockClick(log.id)}>
               <div className="log-name-block"><span>{log.timestamp} |</span> {log.computer_name}</div>
-              {selectedLogId === log.id && <LogDetails id={log.id} />} {/* Render LogDetails if selected */}
+              {selectedLogId === log.id && <LogDetails id={log.id} />}
             </li>
           ))
         ) : (
-          <li>Нет доступных логов</li>
+          // При отсутствии информации
+          <li className="logs-card"> 
+            <div className="log-name-block"><span>Нет доступных логов</span></div>
+          </li>
         )}
       </ul>
     </div>
