@@ -11,4 +11,3 @@ src/*.egg-info
 lib
 lib64
 __pycache__/
-.venv
