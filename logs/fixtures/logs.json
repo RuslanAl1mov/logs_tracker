@@ -1,0 +1,15 @@
+[
+  {
+    "model": "logs.logevent",
+    "pk": 1,
+    "fields": {
+      "timestamp": "2024-09-03_18-23-31",
+      "computer_name": "MacBook-Pro-sergei.local",
+      "event_type": "Input",
+      "application": "Opera",
+      "window_title": "Opera",
+      "content": "cfv",
+      "screenshot_url": "logs/screenshots/MacBook-Pro-sergei.local_LogEvent_2024-09-03_18-23-31.jpg"
+    }
+  }
+]
