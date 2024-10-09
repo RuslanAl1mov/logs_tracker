@@ -56,10 +56,12 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
+# Доступ для всех
+CORS_ALLOW_ALL_ORIGINS = True
 # Разрешить доступ только с указанного источника
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Ваше React приложение
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:3000",  # Ваше React приложение
+# ]
 
 ROOT_URLCONF = 'logs_tracker.urls'
 
